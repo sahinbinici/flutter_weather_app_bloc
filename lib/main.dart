@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/blocs/weather/bloc.dart';
+import 'package:weather/locator.dart';
 import 'package:weather/widgets/weather_app.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 
@@ -14,7 +20,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: WeatherApp(),
+      home: BlocProvider<WeatherBloc>(
+          create: (context)=> WeatherBloc(),
+          child: WeatherApp()),
     );
   }
 }
